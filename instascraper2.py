@@ -1,3 +1,4 @@
+#!/usr/local/bin/python
 from selenium import webdriver
 from bs4 import BeautifulSoup
 import re
@@ -39,7 +40,7 @@ for post in posts:
 
     #extract hashtags using Regex
     string = caption.lower()
-    x = re.findall("#[^\s\u005B-\u0060\u0021-\u002F\u003A-\u0040\u00A1-\u00BC\u3000-\u301F\uFF00-\uFFEF]+", string)
+    x = re.findall("#[^\s\u005B-\u0060\u0021-\u002F\u003A-\u0040\u00A1-\u00BC\u3000-\u301F\uFF00-\uFFEF\u2000-\u25FF\u27C0-\u2BFF]+", string)
     print(x)
 
     #write all hashtags to file
