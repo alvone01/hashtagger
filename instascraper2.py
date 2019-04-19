@@ -5,7 +5,7 @@ import re
 import os
 
 #install dependencies
-os.system('pip3.6 install -r requirements.txt')
+os.system('pip install -r requirements.txt')
 
 #receive input from user through command line
 input = input("Please input designated tag: ")
@@ -23,6 +23,10 @@ bs = BeautifulSoup(driver.page_source, 'lxml')
 posts = bs.findAll('div', {'class': 'v1Nh3 kIKUG _bz0w'})
 posts = posts[:3]
 
+if not posts:
+    print("Couldn\'t find the posts, please input different tag.")
+else:
+    print("Found posts . . .")
 
 f = open("results.txt", "w+")
 f.write("Hashtags of Top 3 Posts with #" + input + " :\n")
@@ -41,7 +45,7 @@ for post in posts:
     #extract hashtags using Regex
     string = caption.lower()
     x = re.findall("#[^\s\u005B-\u0060\u0021-\u002F\u003A-\u0040\u00A1-\u00BC\u3000-\u301F\uFF00-\uFFEF\u2000-\u25FF\u27C0-\u2BFF]+", string)
-    print(x)
+    #print(x)
 
     #write all hashtags to file
     f.write("\n".join(x))
