@@ -1,11 +1,11 @@
 #!/usr/local/bin/python
+
+import os
+os.system('pip install -r requirements.txt')
+
 from selenium import webdriver
 from bs4 import BeautifulSoup
 import re
-import os
-
-#install dependencies
-os.system('pip install -r requirements.txt')
 
 #receive input from user through command line
 input = input("Please input designated tag: ")
