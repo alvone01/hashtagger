@@ -19,7 +19,7 @@ elif (os.name == 'posix'):
 #setup chrome driver
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('headless')
-driver = webdriver.Chrome(executable_path= dir, chrome_options = chrome_options)
+driver = webdriver.Chrome(executable_path = dir, chrome_options = chrome_options)
 
 #enter tags page based on user's inpur
 driver.get('https://www.instagram.com/explore/tags/' + input + '/')
@@ -42,7 +42,7 @@ for post in posts:
 
     #scrape caption for each post
     a = post.find('a')
-    driver2 = webdriver.Chrome(executable_path= dir, chrome_options = chrome_options)
+    driver2 = webdriver.Chrome(executable_path = dir, chrome_options = chrome_options)
     driver2.get('https://www.instagram.com' + str(a.get('href')))
     bs2 = BeautifulSoup(driver2.page_source, 'lxml')
     list = bs2.findAll('div', {'class': 'C4VMK'})
@@ -51,7 +51,7 @@ for post in posts:
     #extract hashtags using Regex
     string = caption.lower()
     x = re.findall("#[^\s\u005B-\u0060\u0021-\u002F\u003A-\u0040\u00A1-\u00BC\u3000-\u301F\uFF00-\uFFEF\u2000-\u25FF\u27C0-\u2BFF]+", string)
-    #print(x)
+    print(x)
 
     #write all hashtags to file
     f.write("\n".join(x))
