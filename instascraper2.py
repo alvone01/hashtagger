@@ -1,0 +1,50 @@
+from selenium import webdriver
+from bs4 import BeautifulSoup
+import re
+import os
+
+#install dependencies
+os.system('pip3.6 install -r requirements.txt')
+
+#receive input from user through command line
+input = input("Please input designated tag: ")
+
+#setup chrome driver
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_argument('headless')
+driver = webdriver.Chrome(executable_path= os.getcwd() + '/ChromeDriver/chromedriver', chrome_options = chrome_options)
+
+#enter tags page based on user's inpur
+driver.get('https://www.instagram.com/explore/tags/' + input + '/')
+
+#scrape top 3 posts based on tag
+bs = BeautifulSoup(driver.page_source, 'lxml')
+posts = bs.findAll('div', {'class': 'v1Nh3 kIKUG _bz0w'})
+posts = posts[:3]
+
+
+f = open("results.txt", "w+")
+f.write("Hashtags of Top 3 Posts with #" + input + " :\n")
+
+
+for post in posts:
+
+    #scrape caption for each post
+    a = post.find('a')
+    driver2 = webdriver.Chrome(executable_path= os.getcwd() + '/ChromeDriver/chromedriver', chrome_options = chrome_options)
+    driver2.get('https://www.instagram.com' + str(a.get('href')))
+    bs2 = BeautifulSoup(driver2.page_source, 'lxml')
+    list = bs2.findAll('div', {'class': 'C4VMK'})
+    caption = list[0].text
+
+    #extract hashtags using Regex
+    string = caption.lower()
+    x = re.findall("#[^\s\u005B-\u0060\u0021-\u002F\u003A-\u0040\u00A1-\u00BC\u3000-\u301F\uFF00-\uFFEF]+", string)
+    print(x)
+
+    #write all hashtags to file
+    f.write("\n".join(x))
+    f.write("\n")
+
+f.close()
+print('RESULTS WRITTEN TO FILE')
