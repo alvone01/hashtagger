@@ -1,5 +1,8 @@
 # Hashtag Extractor
-A simple program that returns a file containing hashtags from top 3 posts based on user's input
+A simple program that returns a file containing hashtags from top 3 posts based on user's input.
+
+## Dependencies
+Dependencies will be installed during runtime based on 'requirements.txt'
 
 ## Notes
 * do run the code 'python cloudbreakr_test.py' from a terminal that reads special unicodes such as emojis and chinese chars
