@@ -2,7 +2,7 @@
 A simple program that returns a file containing hashtags from top 3 posts based on user's input.
 
 ## Methods
-Uses BeautifulSoup4 to scrape Instagram page based on input tag, and Regex to extract hashtags into file.
+Uses BeautifulSoup4 to scrape Instagram page based on input tag, and Regex to extract hashtags into a file.
 
 ## Dependencies
 Dependencies will be installed during runtime based on 'requirements.txt'.
